@@ -6,39 +6,69 @@
 # back (not `print`).
 
 
-def pig_latin(word):
+def pig_latin(word: str):
+    vowels = ["a","e","i", "o", "u"]
+    for x in vowels:
+        if word[0] == x:
+            return word + "way"
+    else:
+        return word[1:] + word[0] + "ay"
+
     # TODO (Part 1): return the Pig Latin form of a single lowercase word.
     #   If it starts with a vowel (a, e, i, o, u): add "way" to the end.
     #   Otherwise: move the first letter to the end and add "ay".
-    pass
+    
 
 
-def word_lengths(sentence):
+def word_lengths(sentence: str) -> list[int]:
     # TODO (Part 2): return a list with the length of each word in `sentence`
     #   (words are separated by spaces).
-    pass
+    
+    data: list[int] = []
+    current_value: int = 0
+    for x in sentence:
+        if x != " ":
+            current_value = current_value + 1
+        else:
+            data.append( current_value)
+            current_value = 0
+    if current_value> 0:
+        data.append( current_value)
+    return data
+        
+            
+            
+
 
 
 def reverse_words(sentence):
     # TODO (Part 3): return `sentence` with the order of its words reversed.
     #   e.g. "hello world" -> "world hello"
-    pass
+    words = sentence.split()
+    return " ".join(words[::-1])
 
 
 def letter_counts(text):
     # TODO (Part 4 - STRETCH, optional): return a dictionary mapping each letter
     #   to how many times it appears in `text`. Ignore case, and ignore anything
-    #   that isn't a letter.
-    pass
+    #   that isn't a letter
+    counts: dict[str, int] = {}
+    
+    for char in text.lower():
+        if char.isalpha():
+            counts[char] = counts.get(char, 0) + 1
+            
+    return counts
+
 
 
 def main():
     # Optional scratch space - use this to try your functions with sample values.
-    # print(pig_latin("banana"))                    # ananabay
-    # print(word_lengths("the quick brown fox"))    # [3, 5, 5, 3]
-    # print(reverse_words("the quick brown fox"))   # fox brown quick the
-    # print(letter_counts("hello"))                 # {'h': 1, 'e': 1, 'l': 2, 'o': 1}
-    pass
+    # print(pig_latin("python"))                    # ananabay
+    #print(word_lengths("the quick brown fox"))    # [3, 5, 5, 3]
+    #print(reverse_words("the quick brown fox"))   # fox brown quick the
+     print(letter_counts("hello"))                 # {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+   
 
 
 if __name__ == "__main__":
